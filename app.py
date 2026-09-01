@@ -42,14 +42,14 @@ st.markdown(
 name = st.text_input("Who is your favorite Manchester United player?")
 st.write(f"{name}, is a great player!")
 
-years = st.number_input(
-"How long have you been a Manchester United fan? (in years)",
-min_value=0, max_value=60, value=10
+league_position = st.number_input(
+    "What position do you think Manchester United will finish in the Premier League this season?", 
+    min_value=0, max_value=20, value=10
 )
 
-frustration = st.slider(
-"Rate your frustration",
-min_value=1, max_value=10, value=5,
+years = st.slider(
+"How long have you been a Manchester United fan?",
+min_value=1, max_value=60, value=30,
 )
 
 st.title("Manchester United 2025/26 Season Stats — Dashboard")
