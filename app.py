@@ -40,8 +40,8 @@ st.markdown(
 )
 
 with st.form("Fan Introduction Form"):
-    name = st.text_input("Who is your favorite Manchester United player?")
-    st.write(f"{name}, is a great player!")
+    player_name = st.text_input("Who is your favorite Manchester United player?")
+    st.write(f"{player_name}, is a great player!")
 
     league_position = st.number_input(
         "What position do you think Manchester United will finish in the Premier League this season?", 
@@ -71,10 +71,9 @@ with st.form("Fan Introduction Form"):
 
 if submitted:
     st.divider()
-    who = name if name else "An anonymous student"
     st.write(
-        f"**{who}** spent **{minutes} min** in **{lot}** "
-        f"during the **{time}**, frustration **{frustration}/10**."
+        f"**{player_name}** is a great choice **{league_position}** position in the league **{years}** years ** "
+        f"**{favorite_manager}** was an amazing manager for Manchester United **, **{current_form}**"
     )
     if would_recommend:
         st.success("Thanks for recommending this dashboard to other Manchester United fans!")
