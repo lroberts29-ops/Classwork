@@ -4,8 +4,8 @@ import numpy as np
 
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
 
-RED = "#EC0303"
-BLACK = "#050505"
+RED = "#DA020E"
+BLACK = "#000000"
 CARD = "#142A4D"
 INK = "#F2EDE4"
 
