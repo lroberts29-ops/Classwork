@@ -6,8 +6,8 @@ st.set_page_config(page_title="Manchester United 2025/26 season stats", page_ico
 
 RED = "#DA020E"
 BLACK = "#000000"
-CARD = "#142A4D"
-INK = "#F2EDE4"
+CARD = "#407FE6"
+INK = "#FBE122"
 
 st.markdown(
     f"""
