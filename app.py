@@ -39,45 +39,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-with st.form("Fan Introduction Form"):
-    player_name = st.text_input("Who is your favorite Manchester United player?")
-    st.write(f"{player_name}, is a great player!")
-
-    league_position = st.number_input(
-        "What position do you think Manchester United will finish in the Premier League this season?", 
-        min_value=0, max_value=20, value=10
-    )
-
-    years = st.slider(
-    "How long have you been a Manchester United fan?",
-    min_value=1, max_value=60, value=30,
-    )
-
-    favorite_manager = st.selectbox(
-    "Who is your favorite Manchester United manager?",
-    ["Sir Matt Busby (1945-1969, 1970-1971)", "Wilf McGuiness (1969-1970)", "Frank O'Farrell (1971-1972)", "Tommy Docherty (1972-1977)", "Dave Sexton (1977-1981)", "Ron Atkinson (1981-1986)", "Sir Alex Ferguson (1986-2013)", "David Moyes (2013-2014)", "Ryan Giggs (2014, interim)", "Louis van Gaal (2014-2016)", "José Mourinho (2016-2018)", "Ole Gunnar Solskjær (2018-2021)", "Michael Carrick (2021, interim)", "Ralf Rangnick (2021-2022, interim)", "Erik ten Hag (2022-2024)", "Ruben Amorim (2024-2026)", "Michael Carrick (2026-present)"],
-    )
-
-    current_form = st.radio(
-    "How do you rate Manchester United's current form?",
-    ["Poor", "Average", "Good", "Excellent"],
-    )
-
-    would_recommend = st.checkbox(
-    "Would you recommend this dashboard to other Manchester United fans?"
-    )
-
-    submitted =st.form_submit_button("Submit")
-
-if submitted:
-    st.divider()
-    st.write(
-        f"**{player_name}** is a great choice **{league_position}** position in the league **{years}** years ** "
-        f"**{favorite_manager}** was an amazing manager for Manchester United **, **{current_form}**"
-    )
-    if would_recommend:
-        st.success("Thanks for recommending this dashboard to other Manchester United fans!")
-
 st.title("Manchester United 2025/26 Season Stats — Dashboard")
 st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
 
@@ -94,7 +55,7 @@ with col3:
 
 st.divider()
 
-tab1, tab2, tab3 = st.tabs(["Average FotMob rating", "Premier League standings", "Tournament Snapshot"])
+tab1, tab2, tab3, tab4 = st.tabs(["Average FotMob rating", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"])
 
 with tab1:
     st.subheader("Top 5 Manchester United ratings")
@@ -147,3 +108,43 @@ with tab2:
         }
     )
     st.dataframe(podium, hide_index=True, use_container_width=True)
+
+with tab4:
+    with st.form("Fan Introduction Form"):
+        player_name = st.text_input("Who is your favorite Manchester United player?")
+        st.write(f"{player_name}, is a great player!")
+
+        league_position = st.number_input(
+            "What position do you think Manchester United will finish in the Premier League this season?", 
+            min_value=0, max_value=20, value=10
+        )
+
+        years = st.slider(
+        "How long have you been a Manchester United fan?",
+        min_value=1, max_value=60, value=30,
+        )
+
+        favorite_manager = st.selectbox(
+        "Who is your favorite Manchester United manager?",
+        ["Sir Matt Busby (1945-1969, 1970-1971)", "Wilf McGuiness (1969-1970)", "Frank O'Farrell (1971-1972)", "Tommy Docherty (1972-1977)", "Dave Sexton (1977-1981)", "Ron Atkinson (1981-1986)", "Sir Alex Ferguson (1986-2013)", "David Moyes (2013-2014)", "Ryan Giggs (2014, interim)", "Louis van Gaal (2014-2016)", "José Mourinho (2016-2018)", "Ole Gunnar Solskjær (2018-2021)", "Michael Carrick (2021, interim)", "Ralf Rangnick (2021-2022, interim)", "Erik ten Hag (2022-2024)", "Ruben Amorim (2024-2026)", "Michael Carrick (2026-present)"],
+        )
+
+        current_form = st.radio(
+        "How do you rate Manchester United's current form?",
+        ["Poor", "Average", "Good", "Excellent"],
+        )
+
+        would_recommend = st.checkbox(
+        "Would you recommend this dashboard to other Manchester United fans?"
+        )
+
+        submitted =st.form_submit_button("Submit")
+
+    if submitted:
+        st.divider()
+        st.write(
+            f"**{player_name}** is a great choice **{league_position}** position in the league **{years}** years ** "
+            f"**{favorite_manager}** was an amazing manager for Manchester United **{current_form}**"
+        )
+    if would_recommend:
+        st.success("Thanks for recommending this dashboard to other Manchester United fans!")
