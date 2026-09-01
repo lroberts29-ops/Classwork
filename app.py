@@ -108,5 +108,3 @@ with tab2:
         }
     )
     st.dataframe(podium, hide_index=True, use_container_width=True)
-
-    st.write("Hello")
