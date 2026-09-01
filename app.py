@@ -52,6 +52,11 @@ years = st.slider(
 min_value=1, max_value=60, value=30,
 )
 
+favorite_manager = st.selectbox(
+"Who is your favorite Manchester United manager?",
+["Sir Matt Busby (1945-1969, 1970-1971)", "Wilf McGuiness (1969-1970)", "Frank O'Farrell (1971-1972)", "Tommy Docherty (1972-1977)", "Dave Sexton (1977-1981)", "Ron Atkinson (1981-1986)", "Alex Ferguson (1986-2013)", "David Moyes (2013-2014)", "Ryan Giggs (2014, interim)", "Louis van Gaal (2014-2016)", "José Mourinho (2016-2018)", "Ole Gunnar Solskjær (2018-2021)", "Michael Carrick (2021, interim)", "Ralf Rangnick (2021-2022, interim)", "Erik ten Hag (2022-present)"],
+)
+
 st.title("Manchester United 2025/26 Season Stats — Dashboard")
 st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
 
