@@ -67,7 +67,17 @@ with st.form("Fan Introduction Form"):
     "Would you recommend this dashboard to other Manchester United fans?"
     )
 
-    st.form_submit_button("Submit")
+    submitted =st.form_submit_button("Submit")
+
+if submitted:
+    st.divider()
+    who = name if name else "An anonymous student"
+    st.write(
+        f"**{who}** spent **{minutes} min** in **{lot}** "
+        f"during the **{time}**, frustration **{frustration}/10**."
+    )
+    if would_recommend:
+        st.success("Thanks for recommending this dashboard to other Manchester United fans!")
 
 st.title("Manchester United 2025/26 Season Stats — Dashboard")
 st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
