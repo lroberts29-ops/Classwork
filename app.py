@@ -159,31 +159,7 @@ with tab1:
     )
 
     st.line_chart(goals_by_team)
-    st.subheader("Top 5 Manchester United ratings")
 
-    if st.checkbox('Show in-depth stats'):
-        players_names=['B. Fernandes', 'Casemiro', 'Cunha', 'Mbeumo', 'Diallo']
-        players_data = pd.DataFrame({
-            'Appearances': [37, 35, 36, 34, 33],
-            'Minutes': [3203, 2600, 2683, 2670, 2428],
-            'Goals': [9, 9, 10, 12, 2]
-        },
-            columns=['Appearances', 'Minutes', 'Goals'],
-            index = players_names
-        )
-        players_data
-
-    chart_col, table_col = st.columns([2, 1])
-
-    with chart_col:
-        st.bar_chart(players.set_index("Player")["Rating"])
-
-    with table_col:
-        st.dataframe(players, hide_index=True, use_container_width=True)
-
-    st.caption(
-        "B. Fernandes breaks the record for the most assists in a single season with 21 earning him the top FotMob rating of 8.03 in the Premier League"
-    )
 
 with tab2:
     st.subheader("How the League Finished")
