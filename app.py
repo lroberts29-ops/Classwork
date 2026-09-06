@@ -172,12 +172,23 @@ with tab4:
                 st.rerun()
 
         # Next button
-        with col2:
-            if st.button("See Summary →"):
-                st.session_state.reason = st.session_state.reason_field
-                st.session_state.frustration = st.session_state.frustration_field
-                st.session_state.step = 3
-                st.rerun()
+        if st.button("Next →"): # /
+            if st.session_state.name_field.strip() == "": # /
+                st.session_state.name_error = True # /
+                st.rerun() # /
+
+            else: # /
+                st.session_state.name = st.session_state.name_field # /
+                st.session_state.name_error = False # /
+                st.session_state.step = 3 # /
+                st.rerun() # /
+
+        #with col2:
+            #if st.button("See Summary →"):
+             #   st.session_state.reason = st.session_state.reason_field
+              #  st.session_state.frustration = st.session_state.frustration_field
+               # st.session_state.step = 3
+                #st.rerun()
 
 
     # STEP 3: SUMMARY + SUBMIT
@@ -187,6 +198,17 @@ with tab4:
             "What position do you think Manchester United will finish in the Premier League this season?", 
             min_value=0, max_value=20, value=10
         )
+
+        if st.button("Next →"): # /
+            if st.session_state.name_field.strip() == "": # /
+                st.session_state.name_error = True # /
+                st.rerun() # /
+
+            else: # /
+                st.session_state.name = st.session_state.name_field # /
+                st.session_state.name_error = False # /
+                st.session_state.step = 4 # /
+                st.rerun() # /
         
     elif st.session_state.step == 4:
 
