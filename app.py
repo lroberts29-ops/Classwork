@@ -109,6 +109,12 @@ with tab1:
         (df["rating"] >= min_rating)
     ]
 
+    if min_rating > df["rating"].min():
+        filtered_df = filtered_df[
+            filtered_df["rating"].isna() |
+            (filtered_df["rating"] >= min_rating)
+        ]
+
     # METRICS
     metric1, metric2, metric3 = st.columns(3)
 
