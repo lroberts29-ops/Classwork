@@ -64,7 +64,7 @@ with col3:
 
 st.divider()
 
-tab1, tab2, tab3, tab4 = st.tabs(["Average FotMob rating", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"])
+tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"])
 
 with tab1:
     st.subheader("Premier League Player Statistics")
