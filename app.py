@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+@st.cache_data
+def load_data():
+    return pd.read_csv(
+        "premier_league_complete_stats_whole2025-2026_season_UPDATED.csv",
+        encoding="latin1"
+    )
+
+df = load_data()
+
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
 
 RED = "#DA020E"
@@ -59,14 +68,6 @@ tab1, tab2, tab3, tab4 = st.tabs(["Average FotMob rating", "Premier League stand
 
 with tab1:
     st.subheader("Top 5 Manchester United ratings")
-
-    players = pd.DataFrame(
-        {
-            "Player": ["B. Fernandes", "Casemiro", "Cunha", "Mbeumo", "Diallo"],
-            "Position": ["Midfielder", "Midfielder", "Forward", "Forward", "Forward"],
-            "Rating": [8.03, 7.33, 7.29, 7.19, 7.19],
-        }
-    )
 
     if st.checkbox('Show in-depth stats'):
         players_names=['B. Fernandes', 'Casemiro', 'Cunha', 'Mbeumo', 'Diallo']
