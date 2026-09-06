@@ -161,15 +161,6 @@ with tab4:
 
         player_name = st.text_input("Who is your favorite Manchester United player?")
 
-
-        st.slider(
-            "Parking frustration today",
-            1,
-            10,
-            value=st.session_state.get("frustration", 5),
-            key="frustration_field"
-        )
-
         col1, col2 = st.columns(2)
 
         # Back button
@@ -192,6 +183,12 @@ with tab4:
     # STEP 3: SUMMARY + SUBMIT
 
     elif st.session_state.step == 3:
+        league_position = st.number_input(
+            "What position do you think Manchester United will finish in the Premier League this season?", 
+            min_value=0, max_value=20, value=10
+        )
+        
+    elif st.session_state.step == 4:
 
         st.write(
             f"**{st.session_state.name}** — here for "
