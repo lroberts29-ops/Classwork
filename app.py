@@ -67,6 +67,98 @@ st.divider()
 tab1, tab2, tab3, tab4 = st.tabs(["Average FotMob rating", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"])
 
 with tab1:
+    st.subheader("Premier League Player Statistics")
+
+    # FILTERS
+    col1, col2 = st.columns(2)
+
+    with col1:
+        positions = st.multiselect(
+            "Filter by position",
+            options=sorted(df["position"].dropna().unique()),
+            default=sorted(df["position"].dropna().unique())
+        )
+
+    with col2:
+        min_rating = st.slider(
+            "Minimum FotMob rating",
+            min_value=float(df["rating"].min()),
+            max_value=float(df["rating"].max()),
+            value=7.0,
+            step=0.1
+        )
+
+    # APPLY FILTERS
+    filtered_df = df[
+        (df["position"].isin(positions)) &
+        (df["rating"] >= min_rating)
+    ]
+
+    # METRICS
+    metric1, metric2, metric3 = st.columns(3)
+
+    with metric1:
+        st.metric(
+            "Players shown",
+            len(filtered_df)
+        )
+
+    with metric2:
+        st.metric(
+            "Average rating",
+            round(filtered_df["rating"].mean(), 2)
+        )
+
+    with metric3:
+        st.metric(
+            "Total goals",
+            int(filtered_df["goals"].sum())
+        )
+
+    st.divider()
+
+    # TABLE
+    st.subheader("Filtered Players")
+
+    display_columns = [
+        "player_name",
+        "team_name",
+        "position",
+        "appearances",
+        "goals",
+        "assists",
+        "rating"
+    ]
+
+    st.dataframe(
+        filtered_df[display_columns],
+        hide_index=True,
+        use_container_width=True
+    )
+
+    # CHART 1
+    st.subheader("Player Ratings")
+
+    rating_chart = (
+        filtered_df
+        .sort_values("rating", ascending=False)
+        .head(10)
+        .set_index("player_name")["rating"]
+    )
+
+    st.bar_chart(rating_chart)
+
+    # CHART 2
+    st.subheader("Goals by Team")
+
+    goals_by_team = (
+        filtered_df
+        .groupby("team_name")["goals"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+    st.line_chart(goals_by_team)
     st.subheader("Top 5 Manchester United ratings")
 
     if st.checkbox('Show in-depth stats'):
