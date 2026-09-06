@@ -110,6 +110,185 @@ with tab2:
     st.dataframe(podium, hide_index=True, use_container_width=True)
 
 with tab4:
+    if "name_error" not in st.session_state: # what i added in
+        st.session_state.name_error = False # /
+
+    # PATTERN 1: COUNTER
+
+    if "submissions" not in st.session_state:
+        st.session_state.submissions = 0
+
+    st.metric("Fan Introductions", st.session_state.submissions)
+
+
+    # PATTERN 2: STEP WIZARD
+
+    if "step" not in st.session_state:
+        st.session_state.step = 1
+
+    st.caption(f"Step {st.session_state.step} of 3")
+
+
+    # STEP 1: NAME
+
+    if st.session_state.step == 1: # /
+
+        st.text_input( # /
+            "Your name", # /
+            value=st.session_state.get("name", ""), # /
+            key="name_field" # /
+        ) # /
+
+        if st.session_state.name_error: # /
+            st.error("Please enter your name before continuing.") # /
+
+        if st.button("Next →"): # /
+
+            if st.session_state.name_field.strip() == "": # /
+                st.session_state.name_error = True # /
+                st.rerun() # /
+
+            else: # /
+                st.session_state.name = st.session_state.name_field # /
+                st.session_state.name_error = False # /
+                st.session_state.step = 2 # /
+                st.rerun() # /
+
+
+    # STEP 2: REASON + FRUSTRATION
+
+    elif st.session_state.step == 2:
+
+        st.selectbox(
+            "Reason for visiting campus",
+            ["Class", "Event", "Meeting", "Other"],
+            key="reason_field"
+        )
+
+        st.slider(
+            "Parking frustration today",
+            1,
+            10,
+            value=st.session_state.get("frustration", 5),
+            key="frustration_field"
+        )
+
+        col1, col2 = st.columns(2)
+
+        # Back button
+        with col1:
+            if st.button("← Back"):
+                st.session_state.reason = st.session_state.reason_field
+                st.session_state.frustration = st.session_state.frustration_field
+                st.session_state.step = 1
+                st.rerun()
+
+        # Next button
+        with col2:
+            if st.button("See Summary →"):
+                st.session_state.reason = st.session_state.reason_field
+                st.session_state.frustration = st.session_state.frustration_field
+                st.session_state.step = 3
+                st.rerun()
+
+
+    # STEP 3: SUMMARY + SUBMIT
+
+    elif st.session_state.step == 3:
+
+        st.write(
+            f"**{st.session_state.name}** — here for "
+            f"**{st.session_state.reason}**, frustration "
+            f"**{st.session_state.frustration}/10**"
+        )
+
+        if st.button("Submit & Add Another"):
+
+            # Create the responses list if it doesn't exist
+            if "responses" not in st.session_state:
+                st.session_state.responses = []
+
+            # Add this response to the growing list
+            st.session_state.responses.append({
+                "name": st.session_state.name,
+                "reason": st.session_state.reason,
+                "frustration": st.session_state.frustration,
+            })
+
+            # Increase submission counter
+            st.session_state.submissions += 1
+
+            # Reset only the form-related values
+            for key in ["step", "name", "reason", "frustration"]:
+                del st.session_state[key]
+
+            st.rerun()
+
+
+    # PATTERN 3: ACCUMULATOR
+
+    if st.session_state.get("responses"): # /
+
+        st.subheader("Today's Responses") # /
+
+        for i, r in enumerate(st.session_state.responses): # /
+
+            col1, col2 = st.columns([5, 1]) # /
+
+            with col1: # /
+                st.write( # /
+                f"- **{r['name']}** — {r['reason']}, " # /
+                f"frustration {r['frustration']}/10" # /
+                ) # /
+
+            with col2: # /
+                if st.button("Delete", key=f"del_{i}"): # /
+                    st.session_state.responses.pop(i) # /
+                    st.session_state.submissions -= 1 # /
+                    st.rerun() # /
+
+        if st.button("Clear All Responses"): # /
+
+            st.session_state.responses = [] # /
+            st.session_state.submissions = 0 # /
+
+            st.rerun() # /
+
+
+    # PATTERN 4: LOOKUP
+
+    st.subheader("Parking Location Guide")
+
+    lots = {
+        "Caples Lot": {
+            "walk": "3 min to Caples",
+            "spots": "Usually open"
+        },
+
+        "Hamilton Lot": {
+            "walk": "8 min to Hamilton",
+            "spots": "Usually open"
+        }
+    }
+
+
+    lot_choice = st.selectbox(
+        "Pick a parking lot",
+        options=list(lots.keys())
+    )
+
+
+    lot_info = lots.get(
+        lot_choice,
+        {
+            "walk": "Unknown",
+            "spots": "Unknown"
+        }
+    )
+
+
+    st.write(f"**Walk time:** {lot_info['walk']}")
+    st.write(f"**Availability:** {lot_info['spots']}")
     with st.form("Fan Introduction Form"):
         player_name = st.text_input("Who is your favorite Manchester United player?")
         st.write(f"{player_name}, is a great player!")
