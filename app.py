@@ -99,7 +99,7 @@ with tab1:
             "Minimum FotMob rating",
             min_value=float(df["rating"].min()),
             max_value=float(df["rating"].max()),
-            value=float(df["rating"].min()),
+            value=float(0),
             step=0.1
         )
 
