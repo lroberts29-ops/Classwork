@@ -159,11 +159,8 @@ with tab4:
 
     elif st.session_state.step == 2:
 
-        st.selectbox(
-            "Reason for visiting campus",
-            ["Class", "Event", "Meeting", "Other"],
-            key="reason_field"
-        )
+        player_name = st.text_input("Who is your favorite Manchester United player?")
+
 
         st.slider(
             "Parking frustration today",
