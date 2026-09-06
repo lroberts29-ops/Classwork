@@ -52,15 +52,30 @@ st.title("Manchester United 2025/26 Season Stats — Dashboard")
 st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
 
 col1, col2, col3 = st.columns(3)
+top_scorer = df.loc[df["goals"].idxmax()]
+top_assister = df.loc[df["assists"].idxmax()]
+top_rated = df.loc[df["rating"].idxmax()]
 
 with col1:
-    st.metric(label="Top goalscorer", value="Sesko", delta="11 goals")
+    st.metric(
+        label="Top goalscorer",
+        value=top_scorer["player_name"],
+        delta=f"{int(top_scorer['goals'])} goals"
+    )
 
 with col2:
-    st.metric(label="Top assister", value="B. Fernandes", delta="Record breaking: 21 assists")
+    st.metric(
+        label="Top assister",
+        value=top_assister["player_name"],
+        delta=f"{int(top_assister['assists'])} assists"
+    )
 
 with col3:
-    st.metric(label="Top FotMob", value="B. Fernandes", delta="8.03")
+    st.metric(
+        label="Top FotMob rating",
+        value=top_rated["player_name"],
+        delta=f"{top_rated['rating']:.2f}"
+    )
 
 st.divider()
 
