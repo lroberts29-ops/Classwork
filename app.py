@@ -97,22 +97,22 @@ with tab1:
     with col2:
         min_rating = st.slider(
             "Minimum FotMob rating",
-            min_value=float(df["rating"].min()),
+            min_value=0.0,
             max_value=float(df["rating"].max()),
-            value=float(0),
+            value=0.0,
             step=0.1
         )
 
     # APPLY FILTERS
-    filtered_df = df[
-        (df["position"].isin(positions)) &
-        (df["rating"] >= min_rating)
-    ]
-
-    if min_rating > df["rating"].min():
-        filtered_df = filtered_df[
-            filtered_df["rating"].isna() |
-            (filtered_df["rating"] >= min_rating)
+    if min_rating == 0:
+        filtered_df = df[
+            df["position"].isin(positions)
+        ]
+    else:
+        filtered_df = df[
+            (df["position"].isin(positions)) &
+            (df["rating"].notna()) &
+            (df["rating"] >= min_rating)
         ]
 
     # METRICS
