@@ -111,9 +111,7 @@ with tab2:
 
 with tab4:
 
-    # -------------------------
     # SESSION STATE
-    # -------------------------
 
     if "name_error" not in st.session_state:
         st.session_state.name_error = False
@@ -129,9 +127,7 @@ with tab4:
     st.caption(f"Step {st.session_state.step} of 4")
 
 
-    # -------------------------
     # STEP 1: NAME
-    # -------------------------
 
     if st.session_state.step == 1:
 
@@ -157,9 +153,7 @@ with tab4:
                 st.rerun()
 
 
-    # -------------------------
     # STEP 2: PLAYER + YEARS
-    # -------------------------
 
     elif st.session_state.step == 2:
 
@@ -197,9 +191,7 @@ with tab4:
                 st.rerun()
 
 
-    # -------------------------
     # STEP 3: LEAGUE + FORM
-    # -------------------------
 
     elif st.session_state.step == 3:
 
@@ -230,9 +222,7 @@ with tab4:
                 st.rerun()
 
 
-    # -------------------------
     # STEP 4: MANAGER + RECOMMEND
-    # -------------------------
 
     elif st.session_state.step == 4:
 
@@ -299,9 +289,7 @@ with tab4:
                 st.rerun()
 
 
-    # -------------------------
     # RESPONSES
-    # -------------------------
 
     if st.session_state.get("responses"):
 
