@@ -60,14 +60,14 @@ with col2: # Second column for top assister
     st.metric(
         label="Top assister", 
         value=top_assister["player_name"],
-        delta=f"{int(top_assister['assists'])} assists" 
+        delta=f"{int(top_assister['assists'])} assists" # Display the top assister with their name and number of assists
     ) # Display the top assister with their name and number of assists
 
 with col3: # Third column for top rated player
     st.metric(
         label="Top FotMob rating",
         value=top_rated["player_name"],
-        delta=f"{top_rated['rating']:.2f}"
+        delta=f"{top_rated['rating']:.2f}" # Display the top rated player with their name and FotMob rating
     ) # Display the top rated player with their name and FotMob rating
 
 st.divider()
@@ -83,15 +83,15 @@ with tab1: # First tab for Premier League Player Statistics
     with col1: # First column for position filter
         positions = st.multiselect(
             "Filter by position",
-            options=sorted(df["position"].dropna().unique()),
-            default=sorted(df["position"].dropna().unique())
+            options=sorted(df["position"].dropna().unique()), # Get unique positions from the dataframe and sort them for the multiselect options
+            default=sorted(df["position"].dropna().unique()) # Set the default selected positions to all unique positions in the dataframe
         ) # Create a multiselect filter for positions, allowing users to select multiple positions to filter the data
 
     with col2: # Second column for minimum rating filter
         min_rating = st.slider(
             "Minimum FotMob rating",
             min_value=0.0,
-            max_value=float(df["rating"].max()),
+            max_value=float(df["rating"].max()), # Set the maximum value of the slider to the maximum rating in the dataframe
             value=0.0,
             step=0.1
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
@@ -99,40 +99,40 @@ with tab1: # First tab for Premier League Player Statistics
     # APPLY FILTERS
     if min_rating == 0: # If the minimum rating is set to 0, filter the dataframe only by position
         filtered_df = df[
-            df["position"].isin(positions)
+            df["position"].isin(positions) # Filter the dataframe to include only players whose position is in the selected positions
         ] # Filter the dataframe to include only players whose position is in the selected positions
     else:
         filtered_df = df[
-            (df["position"].isin(positions)) &
-            (df["rating"].notna()) &
-            (df["rating"] >= min_rating)
+            (df["position"].isin(positions)) & # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
+            (df["rating"].notna()) & # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
+            (df["rating"] >= min_rating) # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
         ]
 
     # METRICS
-    metric1, metric2, metric3 = st.columns(3)
+    metric1, metric2, metric3 = st.columns(3) # Create three columns for metrics
 
     with metric1:
         st.metric(
             "Players shown",
-            len(filtered_df)
-        )
+            len(filtered_df) # Display the number of players shown in the filtered dataframe
+        ) # Display the number of players shown in the filtered dataframe
 
     with metric2:
         st.metric(
             "Average rating",
-            round(filtered_df["rating"].mean(), 2)
-        )
+            round(filtered_df["rating"].mean(), 2) # Display the average FotMob rating of the players shown in the filtered dataframe, rounded to two decimal places
+        ) # Display the average FotMob rating of the players shown in the filtered dataframe, rounded to two decimal places
 
     with metric3:
         st.metric(
             "Total goals",
-            int(filtered_df["goals"].sum())
-        )
+            int(filtered_df["goals"].sum()) # Display the total number of goals scored by the players shown in the filtered dataframe, converted to an integer
+        ) # Display the total number of goals scored by the players shown in the filtered dataframe, converted to an integer
 
     st.divider()
 
     # TABLE
-    st.subheader("Filtered Players")
+    st.subheader("Filtered Players") # Add a subheader for the filtered players table
 
     display_columns = [
         "player_name",
@@ -142,37 +142,37 @@ with tab1: # First tab for Premier League Player Statistics
         "goals",
         "assists",
         "rating"
-    ]
+    ] # Define the columns to display in the filtered players table
 
     st.dataframe(
-        filtered_df[display_columns],
+        filtered_df[display_columns], # Display the filtered players table with the specified columns
         hide_index=True,
         use_container_width=True
-    )
+    ) # Display the filtered players table with the specified columns, hiding the index and using the container width for better visibility
 
     # CHART 1
     st.subheader("Player Ratings")
 
     rating_chart = (
         filtered_df
-        .sort_values("rating", ascending=False)
-        .head(10)
-        .set_index("player_name")["rating"]
-    )
+        .sort_values("rating", ascending=False) # Sort the filtered dataframe by FotMob rating in descending order
+        .head(10) # Select the top 10 players by FotMob rating
+        .set_index("player_name")["rating"] # Set the player names as the index and select the FotMob rating column for the chart
+    ) # Create a chart showing the top 10 players by FotMob rating, sorted in descending order and using the player names as the index
 
-    st.bar_chart(rating_chart)
+    st.bar_chart(rating_chart) # Display a bar chart of the top 10 players by FotMob rating, using the player names as the x-axis and the ratings as the y-axis
 
     # CHART 2
     st.subheader("Goals by Team")
 
     goals_by_team = (
         filtered_df
-        .groupby("team_name")["goals"]
-        .sum()
-        .sort_values(ascending=False)
-    )
+        .groupby("team_name")["goals"] #Group the filtered dataframe by team name and sum the goals scored by each team
+        .sum() # Sum the goals for each team
+        .sort_values(ascending=False) # Sort the teams by total goals in descending order
+    ) # Create a chart showing the total goals scored by each team, sorted in descending order
 
-    st.line_chart(goals_by_team)
+    st.line_chart(goals_by_team) # Display a line chart of the total goals scored by each team, using the team names as the x-axis and the total goals as the y-axis
 
 
 with tab2:
