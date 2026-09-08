@@ -2,14 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-@st.cache_data
-def load_data():
-    return pd.read_csv(
-        "premier_league_complete_stats_whole2025-2026_season_UPDATED.csv",
-        encoding="latin1"
-    )
-
-df = load_data()
+df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv")
 
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
 
