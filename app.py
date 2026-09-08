@@ -58,9 +58,9 @@ with col1: # First column for top goalscorer
 
 with col2: # Second column for top assister
     st.metric(
-        label="Top assister",
+        label="Top assister", 
         value=top_assister["player_name"],
-        delta=f"{int(top_assister['assists'])} assists"
+        delta=f"{int(top_assister['assists'])} assists" 
     ) # Display the top assister with their name and number of assists
 
 with col3: # Third column for top rated player
