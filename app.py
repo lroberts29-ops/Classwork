@@ -175,7 +175,7 @@ with tab1: # First tab for Premier League Player Statistics
     st.line_chart(goals_by_team) # Display a line chart of the total goals scored by each team, using the team names as the x-axis and the total goals as the y-axis
 
 
-with tab2:
+with tab2: # Second tab for Premier League standings
     st.subheader("How the League Finished")
 
     podium = pd.DataFrame(
@@ -192,7 +192,17 @@ with tab2:
     )
     st.dataframe(podium, hide_index=True, use_container_width=True)
 
-with tab4:
+with tab3: # Third tab for Tournament Snapshot
+    st.subheader("Tournament Snapshot")
+
+    st.write(
+        "Manchester United finished 3rd in the Premier League, "
+        "qualifying for the UEFA Champions League. "
+        "They were eliminated in the Round of 16 of the UEFA Champions League, "
+        "and reached the semi-finals of the FA Cup."
+    )
+
+with tab4: # Fourth tab for Fan Introduction form
 
     # SESSION STATE
 
