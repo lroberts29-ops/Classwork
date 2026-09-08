@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="Premier League Stats", page_icon="", layout="wide") # configuring the page browser layout and information
-
 df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv")
 
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
