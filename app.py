@@ -97,10 +97,10 @@ with tab1: # First tab for Premier League Player Statistics
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
 
     # APPLY FILTERS
-    if min_rating == 0:
+    if min_rating == 0: # If the minimum rating is set to 0, filter the dataframe only by position
         filtered_df = df[
             df["position"].isin(positions)
-        ]
+        ] # Filter the dataframe to include only players whose position is in the selected positions
     else:
         filtered_df = df[
             (df["position"].isin(positions)) &
