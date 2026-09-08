@@ -45,56 +45,56 @@ st.title("Manchester United 2025/26 Season Stats — Dashboard")
 st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
 
 col1, col2, col3 = st.columns(3)
-top_scorer = df.loc[df["goals"].idxmax()]
-top_assister = df.loc[df["assists"].idxmax()]
-top_rated = df.loc[df["rating"].idxmax()]
+top_scorer = df.loc[df["goals"].idxmax()] # Find the player with the most goals
+top_assister = df.loc[df["assists"].idxmax()] # Find the player with the most assists
+top_rated = df.loc[df["rating"].idxmax()] # Find the player with the highest FotMob rating
 
-with col1:
+with col1: # First column for top goalscorer
     st.metric(
         label="Top goalscorer",
         value=top_scorer["player_name"],
         delta=f"{int(top_scorer['goals'])} goals"
-    )
+    ) # Display the top goalscorer with their name and number of goals
 
-with col2:
+with col2: # Second column for top assister
     st.metric(
         label="Top assister",
         value=top_assister["player_name"],
         delta=f"{int(top_assister['assists'])} assists"
-    )
+    ) # Display the top assister with their name and number of assists
 
-with col3:
+with col3: # Third column for top rated player
     st.metric(
         label="Top FotMob rating",
         value=top_rated["player_name"],
         delta=f"{top_rated['rating']:.2f}"
-    )
+    ) # Display the top rated player with their name and FotMob rating
 
 st.divider()
 
-tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"])
+tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"]) # Create tabs for different sections of the dashboard
 
-with tab1:
-    st.subheader("Premier League Player Statistics")
+with tab1: # First tab for Premier League Player Statistics
+    st.subheader("Premier League Player Statistics") # Add a subheader for the first tab
 
     # FILTERS
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2) # Create two columns for filters
 
-    with col1:
+    with col1: # First column for position filter
         positions = st.multiselect(
             "Filter by position",
             options=sorted(df["position"].dropna().unique()),
             default=sorted(df["position"].dropna().unique())
-        )
+        ) # Create a multiselect filter for positions, allowing users to select multiple positions to filter the data
 
-    with col2:
+    with col2: # Second column for minimum rating filter
         min_rating = st.slider(
             "Minimum FotMob rating",
             min_value=0.0,
             max_value=float(df["rating"].max()),
             value=0.0,
             step=0.1
-        )
+        ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
 
     # APPLY FILTERS
     if min_rating == 0:
