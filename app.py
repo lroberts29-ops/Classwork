@@ -112,6 +112,12 @@ with tab1: # First tab for Premier League Player Statistics
             key="rating_filter" # Set a key for the slider widget to store its state in the session state
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
 
+    # CLEAR FILTERS BUTTON
+    st.button(
+        "Clear filters",
+        on_click=clear_filters # Call the clear_filters function when the button is clicked to reset
+    )
+
     # APPLY FILTERS
     if min_rating == 0: # If the minimum rating is set to 0, filter the dataframe only by position
         filtered_df = df[
