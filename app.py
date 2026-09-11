@@ -87,7 +87,8 @@ with tab1: # First tab for Premier League Player Statistics
         positions = st.multiselect(
             "Filter by position",
             options=sorted(df["position"].dropna().unique()), # Get unique positions from the dataframe and sort them for the multiselect options
-            default=sorted(df["position"].dropna().unique()) # Set the default selected positions to all unique positions in the dataframe
+            default=sorted(df["position"].dropna().unique()), # Set the default selected positions to all unique positions in the dataframe
+            key="position_filter" # Set a key for the multiselect widget to store its state in the session state
         ) # Create a multiselect filter for positions, allowing users to select multiple positions to filter the data
 
     with col2: # Second column for minimum rating filter
@@ -96,14 +97,17 @@ with tab1: # First tab for Premier League Player Statistics
             min_value=0.0,
             max_value=float(df["rating"].max()), # Set the maximum value of the slider to the maximum rating in the dataframe
             value=0.0,
-            step=0.1
+            step=0.1,
+            key="rating_filter" # Set a key for the slider widget to store its state in the session state
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
 
     # CLEAR FILTERS BUTTON
 
     if st.button("Clear filters"): # Create a button to clear the filters
-        st.session_state.filters_active = False # Set the session state variable to False when the button is clicked
-        st.session_state.clear_filters = True # Set a session state variable to indicate that filters should be cleared
+        st.session_state.position_filter = sorted(
+            df["position"].dropna().unique()
+        ) # Reset the position filter to include all unique positions in the dataframe
+        st.session_state.rating_filter = 0.0 # Reset the minimum rating filter to 0
         st.rerun() # Rerun the app to reset the filters
 
     # APPLY FILTERS
