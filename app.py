@@ -6,7 +6,7 @@ df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.cs
 
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
 
-PINK = "#F907B4"
+RED = "#DA020E"
 BLACK = "#000000"
 CARD = "#407FE6"
 INK = "#FBE122"
