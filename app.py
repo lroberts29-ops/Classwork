@@ -196,7 +196,6 @@ with tab1: # First tab for Premier League Player Statistics
 
     st.line_chart(goals_by_team) # Display a line chart of the total goals scored by each team, using the team names as the x-axis and the total goals as the y-axis
 
-
 with tab2: # Second tab for Premier League standings
     st.subheader("How the League Finished")
 
