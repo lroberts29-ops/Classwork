@@ -2,16 +2,16 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv")
+df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv") # Load the Premier League stats data from a CSV file into a pandas DataFrame
 
-st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide")
+st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide") # Set the page configuration for the Streamlit app, including the title, icon, and layout
 
 RED = "#DA020E"
 BLACK = "#000000"
 CARD = "#407FE6"
 INK = "#FBE122"
 
-st.markdown(
+st.markdown( # Use markdown to apply custom CSS styles to the Streamlit app, including background color, font styles, and colors for various elements
     f"""
     <style>
         .stApp {{
@@ -41,36 +41,36 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("Manchester United 2025/26 Season Stats — Dashboard")
-st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.")
+st.title("Manchester United 2025/26 Season Stats — Dashboard") # Set the title of the Streamlit app to "Manchester United 2025/26 Season Stats — Dashboard"
+st.caption("Real, verified football data. Built entirely with columns, tabs, sidebar, and an expander.") # Add a caption below the title to describe the dashboard as containing real, verified football data and built with various Streamlit components
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(3) # Create three columns in the Streamlit app layout to display metrics for top goalscorer, top assister, and top FotMob rating player
 top_scorer = df.loc[df["goals"].idxmax()] # Find the player with the most goals
 top_assister = df.loc[df["assists"].idxmax()] # Find the player with the most assists
 top_rated = df.loc[df["rating"].idxmax()] # Find the player with the highest FotMob rating
 
 with col1: # First column for top goalscorer
     st.metric(
-        label="Top goalscorer",
-        value=top_scorer["player_name"],
-        delta=f"{int(top_scorer['goals'])} goals"
+        label="Top goalscorer", # Display the top goalscorer with their name and number of goals
+        value=top_scorer["player_name"], # Display the top goalscorer's name
+        delta=f"{int(top_scorer['goals'])} goals" # Display the number of goals for the top goalscorer
     ) # Display the top goalscorer with their name and number of goals
 
 with col2: # Second column for top assister
     st.metric(
-        label="Top assister", 
-        value=top_assister["player_name"],
+        label="Top assister", # Display the top assister with their name and number of assists
+        value=top_assister["player_name"], # Display the top assister's name
         delta=f"{int(top_assister['assists'])} assists" # Display the top assister with their name and number of assists
     ) # Display the top assister with their name and number of assists
 
 with col3: # Third column for top rated player
     st.metric(
-        label="Top FotMob rating",
-        value=top_rated["player_name"],
+        label="Top FotMob rating", # Display the top rated player with their name and FotMob rating
+        value=top_rated["player_name"], # Display the top rated player's name
         delta=f"{top_rated['rating']:.2f}" # Display the top rated player with their name and FotMob rating
     ) # Display the top rated player with their name and FotMob rating
 
-st.divider()
+st.divider() # Add a horizontal divider line to separate the metrics section from the rest of the dashboard
 
 tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier League standings", "Tournament Snapshot", "Fan Introduction form"]) # Create tabs for different sections of the dashboard
 
@@ -78,8 +78,8 @@ with tab1: # First tab for Premier League Player Statistics
     st.subheader("Premier League Player Statistics") # Add a subheader for the first tab
 
     if "position_filter" not in st.session_state: # Check if the position filter is not in the session state
-        st.session_state.position_filter = sorted(
-            df["position"].dropna().unique()
+        st.session_state.position_filter = sorted( 
+            df["position"].dropna().unique() # Get all unique positions from the dataframe, drop any NaN values, and sort them to initialize the position filter in the session state
         ) # Initialize the position filter in the session state with all unique positions in the dataframe
 
     if "rating_filter" not in st.session_state: # Check if the rating filter is not in the session state
@@ -87,7 +87,7 @@ with tab1: # First tab for Premier League Player Statistics
 
     def clear_filters(): # Define a function to clear the filters
         st.session_state.position_filter = sorted(
-            df["position"].dropna().unique()
+            df["position"].dropna().unique() # Get all unique positions from the dataframe, drop any NaN values, and sort them to reset the position filter in the session state
         ) # Reset the position filter in the session state to all unique positions in the dataframe
         st.session_state.rating_filter = 0.0 # Reset the rating filter in the session state to 0.0
 
@@ -96,7 +96,7 @@ with tab1: # First tab for Premier League Player Statistics
 
     with col1: # First column for position filter
         positions = st.multiselect(
-            "Filter by position",
+            "Filter by position", # Add a multiselect filter for positions, allowing users to select multiple positions to filter the data
             options=sorted(df["position"].dropna().unique()), # Get unique positions from the dataframe and sort them for the multiselect options
             default=sorted(df["position"].dropna().unique()), # Set the default selected positions to all unique positions in the dataframe
             key="position_filter" # Set a key for the multiselect widget to store its state in the session state
@@ -104,19 +104,19 @@ with tab1: # First tab for Premier League Player Statistics
 
     with col2: # Second column for minimum rating filter
         min_rating = st.slider(
-            "Minimum FotMob rating",
-            min_value=0.0,
+            "Minimum FotMob rating", # Add a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
+            min_value=0.0, # Set the minimum value of the slider to 0.0
             max_value=float(df["rating"].max()), # Set the maximum value of the slider to the maximum rating in the dataframe
-            value=0.0,
-            step=0.1,
+            value=0.0, # Set the default value of the slider to 0.0
+            step=0.1, # Set the step size of the slider to 0.1 for finer control over the rating threshold
             key="rating_filter" # Set a key for the slider widget to store its state in the session state
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
 
     # CLEAR FILTERS BUTTON
     st.button(
-        "Clear filters",
+        "Clear filters", # Add a button to clear the filters, allowing users to reset the position and rating filters to their default values
         on_click=clear_filters # Call the clear_filters function when the button is clicked to reset
-    )
+    ) # Create a button to clear the filters, allowing users to reset the position and rating filters to their default values
 
     # APPLY FILTERS
     if min_rating == 0: # If the minimum rating is set to 0, filter the dataframe only by position
@@ -128,14 +128,14 @@ with tab1: # First tab for Premier League Player Statistics
             (df["position"].isin(positions)) & # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
             (df["rating"].notna()) & # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
             (df["rating"] >= min_rating) # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
-        ]
+        ] # Filter the dataframe to include only players whose position is in the selected positions and whose rating is not null and greater than or equal to the minimum rating
 
     # METRICS
     metric1, metric2, metric3 = st.columns(3) # Create three columns for metrics
 
     with metric1:
         st.metric(
-            "Players shown",
+            "Players shown", # Display the number of players shown in the filtered dataframe
             len(filtered_df) # Display the number of players shown in the filtered dataframe
         ) # Display the number of players shown in the filtered dataframe
 
