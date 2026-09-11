@@ -77,7 +77,8 @@ tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier L
 with tab1: # First tab for Premier League Player Statistics
     st.subheader("Premier League Player Statistics") # Add a subheader for the first tab
 
-    if "filters_active" not in st.session_state: # Check if the session state variable "filters_active" exists, and if not, initialize it to True
+    st.session_state.clear_filters = False # Initialize a session state variable to track whether filters should be cleared
+    if "filters_active" not in st.session_state and st.session_state.clear_filters != True: # Check if the session state variable "filters_active" exists, and if not, initialize it to True
         st.session_state.filters_active = True # Initialize a session state variable to track whether filters are active
 
     # FILTERS
@@ -103,6 +104,7 @@ with tab1: # First tab for Premier League Player Statistics
 
     if st.button("Clear filters"): # Create a button to clear the filters
         st.session_state.filters_active = False # Set the session state variable to False when the button is clicked
+        st.session_state.clear_filters = True # Set a session state variable to indicate that filters should be cleared
         st.rerun() # Rerun the app to reset the filters
 
     # APPLY FILTERS
