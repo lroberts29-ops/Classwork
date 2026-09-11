@@ -77,8 +77,19 @@ tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier L
 with tab1: # First tab for Premier League Player Statistics
     st.subheader("Premier League Player Statistics") # Add a subheader for the first tab
 
-    if "filters_active" not in st.session_state: # Check if the session state variable "filters_active" exists, and if not, initialize it to True
-        st.session_state.filters_active = True # Initialize a session state variable to track whether filters are active
+    if "position_filter" not in st.session_state: # Check if the position filter is not in the session state
+        st.session_state.position_filter = sorted(
+            df["position"].dropna().unique()
+        ) # Initialize the position filter in the session state with all unique positions in the dataframe
+
+    if "rating_filter" not in st.session_state: # Check if the rating filter is not in the session state
+        st.session_state.rating_filter = 0.0 # Initialize the rating filter in the session state with a default value of 0.0
+
+    def clear_filters(): # Define a function to clear the filters
+        st.session_state.position_filter = sorted(
+            df["position"].dropna().unique()
+        ) # Reset the position filter in the session state to all unique positions in the dataframe
+        st.session_state.rating_filter = 0.0 # Reset the rating filter in the session state to 0.0
 
     # FILTERS
     col1, col2 = st.columns(2) # Create two columns for filters
@@ -100,15 +111,6 @@ with tab1: # First tab for Premier League Player Statistics
             step=0.1,
             key="rating_filter" # Set a key for the slider widget to store its state in the session state
         ) # Create a slider filter for minimum FotMob rating, allowing users to set a minimum rating threshold for the data
-
-    # CLEAR FILTERS BUTTON
-
-    if st.button("Clear filters"): # Create a button to clear the filters
-        st.session_state.position_filter = sorted(
-            df["position"].dropna().unique()
-        ) # Reset the position filter to include all unique positions in the dataframe
-        st.session_state.rating_filter = 0.0 # Reset the minimum rating filter to 0
-        st.rerun() # Rerun the app to reset the filters
 
     # APPLY FILTERS
     if min_rating == 0: # If the minimum rating is set to 0, filter the dataframe only by position
