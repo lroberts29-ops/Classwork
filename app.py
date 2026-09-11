@@ -77,8 +77,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Premier League Player Statistics", "Premier L
 with tab1: # First tab for Premier League Player Statistics
     st.subheader("Premier League Player Statistics") # Add a subheader for the first tab
 
-    st.session_state.clear_filters = False # Initialize a session state variable to track whether filters should be cleared
-    if "filters_active" not in st.session_state and st.session_state.clear_filters != True: # Check if the session state variable "filters_active" exists, and if not, initialize it to True
+    if "filters_active" not in st.session_state: # Check if the session state variable "filters_active" exists, and if not, initialize it to True
         st.session_state.filters_active = True # Initialize a session state variable to track whether filters are active
 
     # FILTERS
