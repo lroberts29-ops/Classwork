@@ -1,1 +1,1 @@
-1. 
+1. This code was chosen because football and the premier league is something that interests me, I think that displaying this statistics of players in different types of charts helps us to understand both strengths and weaknesses of said p
