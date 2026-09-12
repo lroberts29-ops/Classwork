@@ -227,7 +227,7 @@ with tab4: # Fourth tab for Fan Introduction form
 
     # SESSION STATE
 
-    if "name_error" not in st.session_state: #  
+    if "name_error" not in st.session_state:  
         st.session_state.name_error = False
 
     if "submissions" not in st.session_state:
