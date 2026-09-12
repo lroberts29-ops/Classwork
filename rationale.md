@@ -1,4 +1,4 @@
 1. This code was chosen because football and the premier league is something that interests me, I think that displaying this statistics of players in different types of charts helps us to understand both strengths and weaknesses of said players, this also helps coaches to analyse where a player may be best suited and tactics to deploy in certain game conditions.
 2. One limitation is that it only covers 3 premier league teams (Arsenal, Manchester City, Manchester united), this means we can't compare the players from the full league
 3. The metrics chosen are meaningful because goals show a player's ability to score, assists show their ability to create opportunities for teammates to score, and the FotMob rating gives an overall measure of their performance. Looking at multiple metrics gives a better understanding of a player's strengths rather than relying on one statistic.
-4. Why each chart type was chosen for what it displays?  
+4. Why each chart type was chosen for what it displays? The data can be used to compare players and identify which players are performing best in different areas. This could help coaches make decisions 
