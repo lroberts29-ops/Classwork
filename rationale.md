@@ -1,1 +1,2 @@
-1. This code was chosen because football and the premier league is something that interests me, I think that displaying this statistics of players in different types of charts helps us to understand both strengths and weaknesses of said p
+1. This code was chosen because football and the premier league is something that interests me, I think that displaying this statistics of players in different types of charts helps us to understand both strengths and weaknesses of said players, this also helps coaches to analyse where a player may be best suited and tactics to deploy in certain game conditions.
+One limitation is that it only covers 3 premier league teams (Arsenal, )
