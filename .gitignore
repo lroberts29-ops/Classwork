@@ -1,1 +1,5 @@
- .streamlit/secrets.toml
+.streamlit/secrets.toml
+
+[credentials]
+username = "abc"
+password = "def"
