@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+if username_matches and password_matches:
+    st.session_state["authenticated"] = True
+    st.session_state["username"] = entered_username
+    # Rerun so the welcome message replaces the form
+    # immediately.
+    st.rerun()
+else:
+    st.error("Incorrect username or password.")
+
 df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv") # Load the Premier League stats data from a CSV file into a pandas DataFrame
 
 st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide") # Set the page configuration for the Streamlit app, including the title, icon, and layout
