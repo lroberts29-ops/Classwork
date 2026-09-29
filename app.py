@@ -55,7 +55,8 @@ st.caption("Real, verified football data. Built entirely with columns, tabs, sid
 # If the visitor is already authenticated, skip the form and show a welcome message.
 if st.session_state["authenticated"] == True:
     st.success(f"Logged in as {st.session_state['username']}.")
-    st.write("You are logged in - Welcome!", "username")
+    correct_username = st.secrets["credentials"]["username"]
+    st.write("You are logged in - Welcome!", correct_username)
 else:
     # st.form groups the two inputs and the submit button so the app only reruns once, on submit.
     login_form = st.form("login_form")
