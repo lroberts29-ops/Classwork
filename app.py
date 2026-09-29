@@ -4,7 +4,7 @@ import numpy as np
 
 df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv") # Load the Premier League stats data from a CSV file into a pandas DataFrame
 
-st.set_page_config(page_title="Manchester United 2025/26 season stats.", page_icon="\U0001F3C6", layout="wide") # Set the page configuration for the Streamlit app, including the title, icon, and layout
+st.set_page_config(page_title="Manchester United 2025/26 season stats", page_icon="\U0001F3C6", layout="wide") # Set the page configuration for the Streamlit app, including the title, icon, and layout
 
 # Initialize the authenticated flag the first time the app runs in a session.
 if "authenticated" not in st.session_state:
