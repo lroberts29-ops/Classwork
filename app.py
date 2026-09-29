@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from auth import check_auth, show_logout_button
 
 df = pd.read_csv("premier_league_complete_stats_whole2025-2026_season_UPDATED.csv") # Load the Premier League stats data from a CSV file into a pandas DataFrame
 
